@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Lib\Obj;
 use Illuminate\Http\Request;
 
 class InventaireController extends Controller
@@ -11,7 +12,14 @@ class InventaireController extends Controller
      */
     public function index()
     {
-        dump('hello world');
+        $user = session('user');
+        $settings = session('settings');
+
+        //dump($settings);
+        $settings_ = $user->settings->pluck('value', 'setting');
+        $obj = Obj::boot($settings_);
+        dump($obj->EMPLACEMENT);
+
     }
 
     /**
